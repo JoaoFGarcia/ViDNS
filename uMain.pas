@@ -163,7 +163,6 @@ begin
       FRestRequest.ClearBody;
       FRestRequest.AddBody(jObj);
       FRestRequest.Method   := rmPUT;
-      //FRestRequest.AddBody(jObj.ToString);
       FRestRequest.Resource := '/domain/zone/' + Manifest.ZoneRecord.Name + '/record';
       FRestRequest.ResourceSuffix := Manifest.ZoneRecord.ID;
       FRestRequest.Params.AddHeader('X-Ovh-Application', Manifest.Request.ApplicationKey).Options := [poDoNotEncode, poAutoCreated];
@@ -185,11 +184,11 @@ begin
       FRestRequest.ClearBody;
       FRestRequest.Method   := rmPost;
       FRestRequest.ResourceSuffix := '';
-      FRestRequest.Resource := '/domain/zone/vieo.cc/refresh';
+      FRestRequest.Resource := '/domain/zone/' + Manifest.ZoneRecord.Name + '/refresh';
       sHash :=
                Manifest.Request.ApplicationSecret   + '+' +
                Manifest.Request.ConsumerKey         + '+' +
-               'POST'                                + '+' +
+               'POST'                               + '+' +
                FRestRequest.GetFullRequestURL()     + '+' +
                FRestRequest.GetFullRequestBody      + '+' +
                IntToStr(iTime);
